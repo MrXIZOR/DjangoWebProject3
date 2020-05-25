@@ -10,10 +10,8 @@
         <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static 'app/content/carousel.css' %}" />
-        
-        <meta name="theme-color" content="#563d7c">
-
     </head>
+
     <body>
         <header>
           <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -49,6 +47,7 @@
             </div>
           </nav>
         </header>
+
         <div>
             {% block content %}{% endblock %}
         </div>
@@ -65,7 +64,7 @@
         <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
         <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
         <script src="{% static 'app/scripts/respond.js' %}"></script>
-        <script src={% static 'app/scripts/bootstrap.bundle.min.js' %} integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+        <script src={% static 'app/scripts/bootstrap.bundle.min.js' %} ></script>
 
     </body>
 </html>
