@@ -9,6 +9,34 @@ from datetime import datetime
 from django.contrib import admin
 from django.urls import reverse
 
+class Feedback(models.Model):
+    CATEGORIES = (
+        ('1','Ошибка'),
+        ('2', 'Блог'),
+        ('3', 'Авторские права')
+    )
+
+    name = models.CharField(max_length = 100, verbose_name = "Имя")
+    topic = models.CharField(verbose_name='Тема сообщения', max_length=100)
+    category = models.CharField(verbose_name='Категория вопроса',
+                                 choices=CATEGORIES, max_length=1)
+    answer = models.BooleanField(verbose_name="Получить ответ?", default=False)
+    #answer = models.CharField(verbose_name="Получить ответ?", max_length=3)
+    email = models.EmailField(verbose_name='Электронная почта', max_length=30)
+    message = models.TextField(verbose_name='Описание вопроса')
+    date = models.DateTimeField(default = datetime.now(), db_index = True, verbose_name = 'Дата')
+
+    def __str__(self):
+        return 'Тема %s, категория: %s' % (self.topic, self.category)
+
+    class Meta:
+        db_table = "Feedbacks"
+        ordering = ["-date"]
+        verbose_name = "Обратная связь"
+        verbose_name_plural = "Сообщения по обратной связи"
+
+admin.site.register(Feedback)
+
 class Blog(models.Model):
     title = models.CharField(max_length = 100, unique_for_date = "posted", verbose_name = "Заголовок")
     description = models.TextField(verbose_name = "Краткое содержание")

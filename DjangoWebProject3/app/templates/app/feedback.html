@@ -1,0 +1,33 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+<br />
+{{ data.name }}
+{% if form != None %}
+
+<div class="container">
+    <br /><h2>Отправьте ваш вопрос</h2><br />
+    <form method="post">
+        {% csrf_token %}
+        <label for="{{ form.name.id_for_label }}">{{form.name.label }}:</label>
+        {{ form.name }}<br /><br />
+        <label for="{{ form.topic.id_for_label }}">{{ form.topic.label }}:</label>
+        {{ form.topic }}<br />
+        <label for="{{ form.category.id_for_label }}">{{ form.category.label }}:</label>
+        {{ form.category }}<br />
+        <label for="{{ form.answer.id_for_label }}">{{ form.answer.label }}:</label>
+        {{ form.answer }}<br /><br />
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}<br /><br />
+        <label for="{{ form.message.id_for_label }}">{{ form.message.label }}:</label>
+        {{ form.message }}<br /><br />
+        <input class="btn btn-outline-success" type="submit" value="Отправить" />
+    </form>
+
+</div>
+{% else %}
+<div class="container">
+    <br /><h2>Благодарим за предоставленную информацию!</h2>
+</div>
+
+{% endif %}
+{% endblock %}

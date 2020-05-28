@@ -13,6 +13,7 @@ from .models import Blog
 from .models import Comment
 from .forms import CommentForm
 from .forms import BlogForm
+from .forms import FeedbackForm 
 
 def home(request):
     """Renders the home page."""
@@ -21,7 +22,7 @@ def home(request):
         request,
         'app/index.html',
         {
-            'title':'Главная',
+            'title':'AI Project | Главная',
             'year':datetime.now().year,
         }
     )
@@ -33,7 +34,7 @@ def contact(request):
         request,
         'app/contact.html',
         {
-            'title':'Контакты',
+            'title':'AI Project | Контакты',
             'year':datetime.now().year,
         }
     )
@@ -45,7 +46,7 @@ def about(request):
         request,
         'app/about.html',
         {
-            'title':'О нас',
+            'title':'AI Project | О нас',
             'message':'Сведение о нас',
             'year':datetime.now().year,
         }
@@ -71,7 +72,7 @@ def registration(request):
         request,
         'app/registration.html',
         {
-            'title':'Регистрация',
+            'title':'AI Project | Регистрация',
             'regform': regform, # передача формы в шаблон веб-страницы
             'year':datetime.now().year,
         }
@@ -83,7 +84,7 @@ def link(request):
         request,
         'app/link.html',
         {
-            'title':'Полезные ссылки',
+            'title':'AI Project | Полезные ссылки',
             'year':datetime.now().year,
         }
     )
@@ -96,7 +97,7 @@ def blog(request):
         request,
         'app/blog.html',
         {
-            'title':'Блог',
+            'title':'AI Project | Блог',
             'posts':posts,
             'year':datetime.now().year,
         }
@@ -123,7 +124,7 @@ def blogpost(request, parametr):
         request,
         'app/blogpost.html',
         {
-            'title':'Блог',
+            'title':'AI Project | Блог',
             'post_1': post_1, # передача конкретной статьи в шаблон веб-страницы
             'comments': comments,
             'form': form,
@@ -151,7 +152,7 @@ def newpost(request):
         request,
         'app/newpost.html',
         {
-            'title':'Добавление статьи',
+            'title':'AI Project | Добавление статьи',
             'blogform':blogform,
             'year':datetime.now().year,
         }
@@ -164,7 +165,47 @@ def videopost(request):
         request,
         'app/videopost.html',
         {
-            'title':'Онлайн-курс',
+            'title':'AI Project | Онлайн-курс',
             'year':datetime.now().year,
+        }
+    )
+
+def feedback(request):
+    assert isinstance(request, HttpRequest)
+    data = None
+    category = {'1': 'Ошибка', '2':'Блог',
+                '3':'Авторские права'}
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback_f = form.save(commit=False)
+            feedback_f.name = form.cleaned_data['name']
+            feedback_f.topic = form.cleaned_data['topic']
+            feedback_f.category = category[ form.cleaned_data['category'] ]
+            feedback_f.answer = form.cleaned_data['answer']
+            feedback_f.email = form.cleaned_data['email']
+            feedback_f.message = form.cleaned_data['message']
+            feedback_f.save()
+            form = None
+            #data = dict()
+            #data['name'] = form.cleaned_data['name']
+            #data['topic'] = form.cleaned_data['topic']
+            #data['category'] = category[ form.cleaned_data['category'] ]
+            #if(form.cleaned_data['answer'] == True):
+            #    data['answer'] = 'Да'
+            #else:
+            #    data['answer'] = 'Нет'
+            #data['email'] = form.cleaned_data['email']
+            #data['message'] = form.cleaned_data['message']
+            #form = None
+    else:
+        form = FeedbackForm()
+    return render(
+        request,
+        'app/feedback.html',
+        {
+            'title':'AI Project | Обратная связь',
+            'form': form,
+            'data':data
         }
     )

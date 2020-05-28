@@ -42,7 +42,8 @@ urlpatterns = [
     path('<int:parametr>/', views.blogpost, name='blogpost'),
     path('newpost/', views.newpost, name='newpost'),
     path('favicon.ico/', RedirectView.as_view(url='/static/favicon.ico'), name='favicon'),
-    path('videopost/', views.videopost, name='videopost')
+    path('videopost/', views.videopost, name='videopost'),
+    path('feedback/', views.feedback, name='feedback'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

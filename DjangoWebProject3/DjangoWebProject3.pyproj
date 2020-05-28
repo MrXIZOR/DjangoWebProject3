@@ -56,11 +56,12 @@
     <Folder Include="DjangoWebProject3\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\templates\app\anketa.html" />
+    <Content Include="app\templates\app\feedback.html" />
     <Content Include="app\templates\app\blog.html" />
     <Content Include="app\templates\app\blogpost.html" />
     <Content Include="app\templates\app\link.html" />
     <Content Include="app\templates\app\newpost.html" />
+    <Content Include="app\templates\app\pool.html" />
     <Content Include="app\templates\app\registration.html" />
     <Content Include="app\templates\app\videopost.html" />
     <Content Include="requirements.txt" />
